@@ -32,12 +32,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MyActivity", "Inside onClick()");
                 //Action to handle button click event
                 if (cbEnabled.isChecked()) {
-                    tvShow.setText("The discount is given");
-                }else {
-                    tvShow.setText("The discount is not given");
+                    double pay = calcPay(100,20);
+                    tvShow.setText("The discount is given. You need to pay $" + pay);
+                } else {
+                    double pay = calcPay(100, 0);
+                    tvShow.setText("The discount is not given. You need to pay $" + pay);
                 }
             }
         });
+
 
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 //duration: how long the display the message. Either LENGTH_LONG or LENGTH_SHORT
             }
         });
-
-
+    }
+    private double calcPay(double price, double discount) {
+        double pay = price * (1 - discount / 100);
+        return pay;
     }
 }
